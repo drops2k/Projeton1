@@ -24,7 +24,7 @@ const navItems = [
   { label: 'Extrato', icon: Activity },
 ];
 
-function App() {
+export function Dashboard({ user, onSignOut }) {
   const [active, setActive] = useState('Visão geral');
   const [balanceVisible, setBalanceVisible] = useState(true);
   const [mobileMenu, setMobileMenu] = useState(false);
@@ -77,8 +77,8 @@ function App() {
             <button className="search-box" onClick={() => action('Busca')}><Search size={17}/><span>Buscar</span><kbd>⌘ K</kbd></button>
             <button className="icon-button notification-button" onClick={() => action('Notificações')} aria-label="Notificações"><Bell size={19}/><i/></button>
             <div className="top-divider"/>
-            <button className="profile" onClick={() => action('Perfil da conta')}>
-              <div className="avatar">FD</div><div className="profile-copy"><strong>Minha conta</strong><small>Conta demonstrativa</small></div><ChevronDown size={15}/>
+            <button className="profile" onClick={onSignOut}>
+              <div className="avatar">{(user?.email || "U").slice(0,2).toUpperCase()}</div><div className="profile-copy"><strong>Minha conta</strong><small>{user?.email || "Conta conectada"}</small></div><span className="logout-label">Sair</span>
             </button>
           </div>
         </header>
@@ -157,4 +157,4 @@ function App() {
   );
 }
 
-export default App;
+
